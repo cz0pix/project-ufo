@@ -17,8 +17,9 @@ function AsteroidWave (num: number, mySprite: Sprite) {
         . . . . . . c c b b b b c c . . 
         . . . . . . . . c c c c . . . . 
         `, SpriteKind.Player)
-    tiles.placeOnTile(asteroid, tiles.getTileLocation(randint(-10, 10), randint(-10, 10)))
-    Render.setSpriteAttribute(asteroid, RCSpriteAttribute.ZOffset, randint(-20, 20))
+    tiles.placeOnTile(asteroid, tiles.getTileLocation(randint(-20, 20), randint(-20, 20)))
+    Render.setSpriteAttribute(asteroid, RCSpriteAttribute.ZOffset, randint(-100, 100))
+    asteroid.follow(mySprite2, 10)
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
@@ -181,7 +182,7 @@ let mySprite22 = sprites.create(img`
     `, SpriteKind.Player)
 mySprite22.setFlag(SpriteFlag.RelativeToCamera, true)
 Render.setSpriteAttribute(mySprite2, RCSpriteAttribute.ZOffset, ZPos)
-Render.moveWithController(0)
-game.onUpdateInterval(100, function () {
+Render.moveWithController(2, 3, 0)
+game.onUpdateInterval(200, function () {
     AsteroidWave(1, asteroid)
 })

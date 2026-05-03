@@ -1,3 +1,48 @@
+function AsteroidWave (num: number, mySprite: Sprite) {
+    asteroid = sprites.create(img`
+        . . . . . c c b b b . . . . . . 
+        . . . . c b d d d d b . . . . . 
+        . . . . c d d d d d d b b . . . 
+        . . . . c d d d d d d d d b . . 
+        . . . c b b d d d d d d d b . . 
+        . . . c b b d d d d d d d b . . 
+        . c c c c b b b b d d d b b b . 
+        . c d d b c b b b b b b b b d b 
+        c b b d d d b b b b b d d b d b 
+        c c b b d d d d d d d b b b d c 
+        c b c c c b b b b b b b d d c c 
+        c c b b c c c c b d d d b c c b 
+        . c c c c c c c c c c c b b b b 
+        . . c c c c c b b b b b b b c . 
+        . . . . . . c c b b b b c c . . 
+        . . . . . . . . c c c c . . . . 
+        `, SpriteKind.Player)
+    tiles.placeOnTile(asteroid, tiles.getTileLocation(randint(-10, 10), randint(-10, 10)))
+    Render.setSpriteAttribute(asteroid, RCSpriteAttribute.ZOffset, randint(-20, 20))
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 4 4 . . . . . . . 
+        . . . . . . 4 5 5 4 . . . . . . 
+        . . . . . . 2 5 5 2 . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, mySprite, Render.getAttribute(Render.attribute.dirX) * 50, Render.getAttribute(Render.attribute.dirY) * 50)
+})
+let projectile: Sprite = null
+let asteroid: Sprite = null
+let mySprite: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -120,4 +165,20 @@ scene.setBackgroundImage(img`
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
     8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
     `)
-tiles.setCurrentTilemap(tilemap`level6`)
+tiles.setCurrentTilemap(tilemap`level3`)
+mySprite = Render.getRenderSpriteVariable()
+let mySprite2 = sprites.create(img`
+    . . . . f . . . . 
+    . . . . f . . . . 
+    . . . . f . . . . 
+    . . . . f . . . . 
+    f f f f f f f f f 
+    . . . . f . . . . 
+    . . . . f . . . . 
+    . . . . f . . . . 
+    . . . . f . . . . 
+    `, SpriteKind.Player)
+mySprite2.setFlag(SpriteFlag.RelativeToCamera, true)
+game.onUpdateInterval(500, function () {
+    AsteroidWave(1, asteroid)
+})

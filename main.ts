@@ -193,6 +193,6 @@ let cross = sprites.create(img`
 cross.setFlag(SpriteFlag.RelativeToCamera, true)
 Render.setSpriteAttribute(mySprite2, RCSpriteAttribute.ZOffset, ZPos)
 Render.moveWithController(2, 3, 0)
-let Sword = sprites.create(assets.image`knife`, SpriteKind.Player)
+let Sword = sprites.create(assets.image`Sword`, SpriteKind.Player)
 Sword.setFlag(SpriteFlag.RelativeToCamera, true)
 AsteroidWave(1, flying_enemy)

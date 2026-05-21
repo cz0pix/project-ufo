@@ -179,6 +179,7 @@ scene.setBackgroundImage(img`
     `)
 tiles.setCurrentTilemap(tilemap`level6`)
 mySprite2 = Render.getRenderSpriteVariable()
+Render.moveWithController(2, 3, 0)
 let cross = sprites.create(img`
     . . . . f . . . . 
     . . . . f . . . . 
@@ -192,7 +193,6 @@ let cross = sprites.create(img`
     `, SpriteKind.Player)
 cross.setFlag(SpriteFlag.RelativeToCamera, true)
 Render.setSpriteAttribute(mySprite2, RCSpriteAttribute.ZOffset, ZPos)
-Render.moveWithController(2, 3, 0)
 let Sword = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 

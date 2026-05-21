@@ -32,27 +32,12 @@ function AsteroidWave (num: number, mySprite: Sprite) {
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . 4 4 . . . . . . . 
-        . . . . . . 4 5 5 4 . . . . . . 
-        . . . . . . 2 5 5 2 . . . . . . 
-        . . . . . . . 2 2 . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, mySprite2, Render.getAttribute(Render.attribute.dirX) * 50, Render.getAttribute(Render.attribute.dirY) * 50)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
 	
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    otherSprite.setFlag(SpriteFlag.Ghost, true)
+    otherSprite.setFlag(SpriteFlag.Invisible, true)
 })
 let projectile: Sprite = null
 let flying_enemy: Sprite = null
@@ -320,3 +305,27 @@ let Sword = sprites.create(img`
     `, SpriteKind.Player)
 Sword.setFlag(SpriteFlag.RelativeToCamera, true)
 AsteroidWave(1, flying_enemy)
+game.onUpdate(function () {
+    for (let index = 0; index < 30; index++) {
+        timer.throttle("action", randint(500, 1000), function () {
+            projectile = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . 4 4 . . . . . . . 
+                . . . . . . 4 5 5 4 . . . . . . 
+                . . . . . . 2 5 5 2 . . . . . . 
+                . . . . . . . 2 2 . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `, flying_enemy, Render.getAttribute(Render.attribute.dirX) * 50, Render.getAttribute(Render.attribute.dirY) * 50)
+        })
+    }
+})

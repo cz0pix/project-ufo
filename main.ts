@@ -193,6 +193,23 @@ let cross = sprites.create(img`
 cross.setFlag(SpriteFlag.RelativeToCamera, true)
 Render.setSpriteAttribute(mySprite2, RCSpriteAttribute.ZOffset, ZPos)
 Render.moveWithController(2, 3, 0)
-let Sword = sprites.create(assets.image`myImage`, SpriteKind.Player)
+let Sword = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Player)
 Sword.setFlag(SpriteFlag.RelativeToCamera, true)
 AsteroidWave(1, flying_enemy)

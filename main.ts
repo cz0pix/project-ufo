@@ -65,6 +65,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     })
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    music.play(music.createSoundEffect(WaveShape.Triangle, 300, 200, 255, 0, 75, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
     sprites.destroy(otherSprite)
     sprites.destroy(sprite)
     otherSprite.setFlag(SpriteFlag.Ghost, true)
@@ -73,8 +74,12 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, oth
     sprite.setFlag(SpriteFlag.Ghost, true)
     sprite.setFlag(SpriteFlag.Invisible, true)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    statusbar.value += -1
+})
 let projectile: Sprite = null
 let flying_enemy: Sprite = null
+let statusbar: StatusBarSprite = null
 let ZPos = 0
 let mySprite2: Sprite = null
 scene.setBackgroundImage(img`
@@ -340,6 +345,9 @@ let Sword = sprites.create(img`
     `, SpriteKind.Player)
 Sword.setFlag(SpriteFlag.RelativeToCamera, true)
 info.setScore(0)
+statusbar = statusbars.create(60, 8, StatusBarKind.Health)
+statusbar.setFlag(SpriteFlag.RelativeToCamera, true)
+statusbar.setPosition(80, 2)
 AsteroidWave(1, flying_enemy)
 game.onUpdate(function () {
 	

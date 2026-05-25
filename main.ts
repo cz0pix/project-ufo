@@ -31,35 +31,58 @@ function AsteroidWave (num: number, mySprite: Sprite) {
         flying_enemy.follow(mySprite2, 10)
     }
 }
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (!(dashing) && statusbar.value == statusbar.max) {
+        let isFacingLeft = 0
+        dashing = true
+        controller.moveSprite(mySprite2, 0, 0)
+        if (controller.up.isPressed()) {
+            let standingStill = 0
+            if (standingStill) {
+                mySprite2.setVelocity(0, 0 - dashspeed)
+            } else if (isFacingLeft) {
+                mySprite2.setVelocity(0 - Math.sqrt(2) / 2 * dashspeed, 0 - Math.sqrt(2) / 2 * dashspeed)
+            } else {
+                mySprite2.setVelocity(Math.sqrt(2) / 2 * dashspeed, 0 - Math.sqrt(2) / 2 * dashspeed)
+            }
+        } else {
+            if (isFacingLeft) {
+                mySprite2.setVelocity(0 - dashspeed, 0)
+            } else {
+                mySprite2.setVelocity(dashspeed, 0)
+            }
+        }
+        mySprite2.startEffect(effects.trail)
+        mySprite2.startEffect(effects.trail)
+        mySprite2.startEffect(effects.trail)
+        statusbar.value = 0
+        timer.after(200, function () {
+            dashing = false
+            mySprite2.vx = 0
+            controller.moveSprite(mySprite2, 100, 0)
+            effects.clearParticles(mySprite2)
+        })
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     timer.throttle("action", 500, function () {
         projectile = sprites.createProjectileFromSprite(img`
-            ................
-            ......8888......
-            ....88888888....
-            ...8886666888...
-            ..888669966888..
-            ..886691196688..
-            .88669111196688.
-            .88691111119688.
-            .88691111119688.
-            .88669111196688.
-            ..886691196688..
-            ..888669966888..
-            ...8886666888...
-            ....88888888....
-            ......8888......
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . 1 1 1 . . . 
+            . . . 1 1 . . . . . 1 1 1 . . . 
+            . . . 1 1 . . 1 1 . 1 1 1 . . . 
+            . . . . . . . 1 1 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . 1 . . . . 
+            . . . . 1 . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
             `, Render.getRenderSpriteInstance(), Render.getAttribute(Render.attribute.dirX) * 200, Render.getAttribute(Render.attribute.dirY) * 200)
         projectile.scale = 1
     })
@@ -78,8 +101,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     statusbar.value += -1
 })
 let projectile: Sprite = null
+let dashing = false
 let flying_enemy: Sprite = null
 let statusbar: StatusBarSprite = null
+let dashspeed = 0
 let ZPos = 0
 let mySprite2: Sprite = null
 scene.setBackgroundImage(img`
@@ -207,7 +232,7 @@ scene.setBackgroundImage(img`
 tiles.setCurrentTilemap(tilemap`level6`)
 Render.takeoverSceneSprites()
 mySprite2 = Render.getRenderSpriteVariable()
-Render.moveWithController(12, 7, 2)
+Render.moveWithController(12, 3, 2)
 let cross = sprites.create(img`
     . . . . f . . . . 
     . . . . f . . . . 
@@ -345,6 +370,7 @@ let Sword = sprites.create(img`
     `, SpriteKind.Player)
 Sword.setFlag(SpriteFlag.RelativeToCamera, true)
 info.setScore(0)
+dashspeed = 350
 statusbar = statusbars.create(60, 8, StatusBarKind.Health)
 statusbar.setFlag(SpriteFlag.RelativeToCamera, true)
 statusbar.setPosition(80, 2)

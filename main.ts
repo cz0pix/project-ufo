@@ -34,7 +34,7 @@ function AsteroidWave (num: number, mySprite: Sprite) {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(dashing) && dashbar.value == dashbar.max) {
         dashing = true
-        Render.moveWithController(60, 5, 0)
+        Render.moveWithController(40, 5, 0)
         music.play(music.createSoundEffect(WaveShape.Square, 400, 600, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
     }
     dashbar.value = 0

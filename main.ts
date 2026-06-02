@@ -34,17 +34,17 @@ function AsteroidWave (num: number, mySprite: Sprite) {
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(dashing) && dashbar.value == dashbar.max) {
         dashing = true
+        Render.moveWithController(40, 5, 0)
+        music.play(music.createSoundEffect(WaveShape.Square, 400, 600, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+        dashbar.value = 0
+        timer.after(200, function () {
+            dashing = false
+            mySprite2.vx = 0
+            controller.moveSprite(mySprite2, 100, 0)
+            effects.clearParticles(mySprite2)
+            Render.moveWithController(12, 3, 3)
+        })
     }
-    Render.moveWithController(40, 5, 0)
-    music.play(music.createSoundEffect(WaveShape.Square, 400, 600, 255, 0, 100, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
-    dashbar.value = 0
-    timer.after(200, function () {
-        dashing = false
-        mySprite2.vx = 0
-        controller.moveSprite(mySprite2, 100, 0)
-        effects.clearParticles(mySprite2)
-        Render.moveWithController(12, 3, 3)
-    })
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     timer.throttle("action", 500, function () {

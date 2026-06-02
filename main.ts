@@ -830,7 +830,7 @@ scene.setBackgroundImage(img`
     cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
     cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
     `)
-tiles.setCurrentTilemap(tilemap`level6`)
+tiles.setCurrentTilemap(tilemap`main level`)
 Render.takeoverSceneSprites()
 mySprite2 = Render.getRenderSpriteVariable()
 Render.moveWithController(12, 3, 3)
@@ -982,6 +982,7 @@ dashbar.value = 0
 dashbar.max = 60
 dashbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 AsteroidWave(1, flying_enemy)
+tiles.placeOnRandomTile(mySprite2, assets.tile`myTile2`)
 game.onUpdate(function () {
     if (!(dashing)) {
         dashbar.value += 1

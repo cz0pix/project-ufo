@@ -1,5 +1,8 @@
+namespace SpriteKind {
+    export const enemy2 = SpriteKind.create()
+}
 function AsteroidWave (num: number, mySprite: Sprite) {
-    for (let index = 0; index < 50; index++) {
+    for (let index = 0; index < 70; index++) {
         flying_enemy = sprites.create(img`
             ........................
             ........................
@@ -28,7 +31,7 @@ function AsteroidWave (num: number, mySprite: Sprite) {
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(flying_enemy, assets.tile`myTile`)
         Render.setSpriteAttribute(flying_enemy, RCSpriteAttribute.ZOffset, randint(5, -5))
-        flying_enemy.follow(mySprite2, 13)
+        flying_enemy.follow(mySprite2, 60)
     }
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -685,6 +688,76 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     game.gameOver(false)
     game.setGameOverMessage(false, "GAME OVER!")
 })
+function ZombieWave (num: number, mySprite: Sprite) {
+    for (let index = 0; index < 30; index++) {
+        zambie = sprites.create(img`
+            . . . 1 1 1 . . . . 
+            . . 1 1 1 1 . . . . 
+            . . 1 1 1 1 1 . . . 
+            . . 1 9 9 9 1 . . . 
+            . 9 9 9 8 1 9 8 8 1 
+            1 9 8 8 8 8 9 9 9 1 
+            1 9 8 6 6 1 8 1 9 1 
+            6 9 6 6 1 1 8 9 9 1 
+            6 6 9 8 8 8 9 9 6 . 
+            6 . 9 9 8 9 9 . 6 . 
+            1 . 8 8 8 8 . . 1 . 
+            1 . 8 8 8 9 . . 1 . 
+            1 . 8 8 9 9 . . . . 
+            . . . 8 9 9 . . . . 
+            . . . 8 9 9 . . . . 
+            . . . 8 9 9 . . . . 
+            . . . 8 9 9 . . . . 
+            . . . 8 9 6 . . . . 
+            `, SpriteKind.Enemy)
+        characterAnimations.loopFrames(
+        zambie,
+        [img`
+            . 1 1 1 1 9 . . . . 
+            . . 1 1 1 9 1 1 . . 
+            1 6 9 1 1 1 9 1 . . 
+            1 6 6 1 1 1 8 . . . 
+            6 6 1 1 8 8 6 9 9 . 
+            6 9 1 1 9 1 9 9 6 9 
+            6 9 1 1 1 1 6 1 1 9 
+            9 9 9 1 1 8 9 1 1 1 
+            9 9 9 1 1 8 1 1 1 1 
+            1 9 1 1 1 8 1 1 . . 
+            1 9 1 1 8 8 8 1 8 . 
+            1 9 8 8 8 6 6 8 . . 
+            . 9 8 9 8 9 6 6 . . 
+            . 9 9 8 8 9 9 . . . 
+            . . 1 9 9 9 9 . . . 
+            . . 1 9 9 9 9 . . . 
+            . . 1 1 . 9 9 . . . 
+            . 1 1 . . 9 9 1 . . 
+            `,img`
+            . . . . . . . . . . 
+            . . . . . . 1 1 . . 
+            . . . 1 1 1 9 1 . . 
+            . . . 1 1 1 8 . . . 
+            . . 1 1 8 8 6 9 . . 
+            6 9 1 1 9 1 9 9 . . 
+            6 9 1 1 1 1 6 1 . . 
+            9 9 9 1 1 8 9 1 9 . 
+            9 9 9 1 1 8 1 1 9 . 
+            1 9 1 1 1 8 1 1 9 . 
+            1 9 1 1 8 8 8 1 9 . 
+            1 9 8 8 8 6 6 8 8 . 
+            . 9 8 9 8 9 9 9 . . 
+            . 9 9 8 8 9 9 9 . . 
+            . . . 9 9 9 9 9 . . 
+            . . . 9 9 9 9 9 9 . 
+            . . 9 9 9 9 . 9 9 . 
+            . . . b b 9 . 9 . . 
+            `],
+        450,
+        characterAnimations.rule(Predicate.Moving)
+        )
+        zambie.follow(mySprite2, 40)
+        tiles.placeOnRandomTile(zambie, assets.tile`myTile3`)
+    }
+}
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Triangle, 300, 200, 255, 0, 75, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
     sprites.destroy(otherSprite)
@@ -701,13 +774,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 })
 let projectile: Sprite = null
 let dashing = false
+let zambie: Sprite = null
 let flying_enemy: Sprite = null
 let dashbar: StatusBarSprite = null
 let statusbar: StatusBarSprite = null
 let Sword: Sprite = null
 let ZPos = 0
 let mySprite2: Sprite = null
-game.showLongText("Hello there", DialogLayout.Full)
+game.showLongText("Welcome Ghost Slayer! You will be send to the battlefield. Your task is simple...          Score 100 points        KILL EVERYTHING", DialogLayout.Full)
 scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
@@ -982,6 +1056,7 @@ dashbar.value = 0
 dashbar.max = 60
 dashbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 AsteroidWave(1, flying_enemy)
+ZombieWave(1, zambie)
 tiles.placeOnRandomTile(mySprite2, assets.tile`myTile2`)
 game.onUpdate(function () {
     if (!(dashing)) {

@@ -28,7 +28,7 @@ function AsteroidWave (num: number, mySprite: Sprite) {
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(flying_enemy, assets.tile`myTile`)
         Render.setSpriteAttribute(flying_enemy, RCSpriteAttribute.ZOffset, randint(5, -5))
-        flying_enemy.follow(mySprite2, 13)
+        flying_enemy.follow(mySprite2, 30)
     }
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {

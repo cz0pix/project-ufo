@@ -2,7 +2,8 @@ namespace SpriteKind {
     export const enemy2 = SpriteKind.create()
 }
 function AsteroidWave (num: number, mySprite: Sprite) {
-    for (let index = 0; index < 70; index++) {
+    tileUtil.replaceAllTiles(assets.tile`myTile4`, assets.tile`myTile`)
+    for (let index = 0; index < 35; index++) {
         flying_enemy = sprites.create(img`
             ........................
             ........................
@@ -33,6 +34,7 @@ function AsteroidWave (num: number, mySprite: Sprite) {
         Render.setSpriteAttribute(flying_enemy, RCSpriteAttribute.ZOffset, randint(5, -5))
         flying_enemy.follow(mySprite2, 60)
     }
+    tileUtil.replaceAllTiles(assets.tile`myTile`, assets.tile`myTile4`)
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(dashing) && dashbar.value == dashbar.max) {
@@ -689,7 +691,8 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     game.setGameOverMessage(false, "GAME OVER!")
 })
 function ZombieWave (num: number, mySprite: Sprite) {
-    for (let index = 0; index < 30; index++) {
+    tileUtil.replaceAllTiles(assets.tile`myTile4`, assets.tile`myTile3`)
+    for (let index = 0; index < 25; index++) {
         zambie = sprites.create(img`
             . . . 1 1 1 . . . . 
             . . 1 1 1 1 . . . . 
@@ -757,7 +760,12 @@ function ZombieWave (num: number, mySprite: Sprite) {
         zambie.follow(mySprite2, 40)
         tiles.placeOnRandomTile(zambie, assets.tile`myTile3`)
     }
+    tileUtil.replaceAllTiles(assets.tile`myTile3`, assets.tile`myTile4`)
 }
+info.onScore(50, function () {
+    game.gameOver(true)
+    game.setGameOverMessage(true, "GGs")
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.play(music.createSoundEffect(WaveShape.Triangle, 300, 200, 255, 0, 75, SoundExpressionEffect.None, InterpolationCurve.Curve), music.PlaybackMode.UntilDone)
     sprites.destroy(otherSprite)
@@ -1058,6 +1066,7 @@ dashbar.setStatusBarFlag(StatusBarFlag.SmoothTransition, true)
 AsteroidWave(1, flying_enemy)
 ZombieWave(1, zambie)
 tiles.placeOnRandomTile(mySprite2, assets.tile`myTile2`)
+music.play(music.stringPlayable("D C A D B C E C ", 200), music.PlaybackMode.LoopingInBackground)
 game.onUpdate(function () {
     if (!(dashing)) {
         dashbar.value += 1

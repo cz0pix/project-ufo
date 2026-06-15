@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const enemy2 = SpriteKind.create()
+    export const title = SpriteKind.create()
 }
 function AsteroidWave (num: number, mySprite: Sprite) {
     tileUtil.replaceAllTiles(assets.tile`myTile4`, assets.tile`myTile`)
@@ -789,7 +790,34 @@ let statusbar: StatusBarSprite = null
 let Sword: Sprite = null
 let ZPos = 0
 let mySprite2: Sprite = null
-game.showLongText("Welcome Ghost Slayer! You will be send to the battlefield. Your task is simple...          Score 100 points        KILL EVERYTHING", DialogLayout.Full)
+game.setDialogFrame(img`
+    ..bbbbbbbbbbbbbbbbbbbb..
+    .bd111111111111111111db.
+    bd1dbbbbbbbbbbbbbbbbd1db
+    b1dbbbbbbbbbbbbbbbbbbd1b
+    b1bd1111111111111111db1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1b111111111111111111b1b
+    b1bd1111111111111111db1b
+    bd1bbbbbbbbbbbbbbbbbb1db
+    bbd111111111111111111dbb
+    .bbbbbbbbbbbbbbbbbbbbbb.
+    ..bbbbbbbbbbbbbbbbbbbb..
+    `)
+game.showLongText("Welcome Ghost Slayer! You will be send to the battlefield. Your task is simple...                          Score 50 points                                 KILL EVERYTHING", DialogLayout.Full)
+game.showLongText("DANIEL CZOPEK                                    s35912                                                    Presents...", DialogLayout.Full)
 scene.setBackgroundImage(img`
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
     6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666

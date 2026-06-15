@@ -588,6 +588,25 @@ namespace myTiles {
 .....................................................................................22....................................................222...............................................................................................................2.
 .......................................................................................22222222222222222222222222222222222222222222222222222.................................................................................................................2.
 `, [myTiles.transparency16,sprites.dungeon.purpleOuterEast1,sprites.dungeon.purpleOuterNorthEast,sprites.dungeon.purpleOuterNorth1,myTiles.tile1,sprites.dungeon.purpleInnerNorthWest,sprites.dungeon.purpleInnerNorthEast,sprites.dungeon.purpleInnerSouthEast,sprites.dungeon.purpleInnerSouthWest,sprites.dungeon.floorLight4,sprites.dungeon.floorLight5,sprites.dungeon.floorLightMoss,sprites.dungeon.floorLight3,sprites.dungeon.floorLight1,sprites.dungeon.floorDark0,sprites.dungeon.floorDark3,sprites.dungeon.floorDark5,sprites.dungeon.floorDark1,sprites.builtin.coral2,sprites.builtin.coral5,sprites.builtin.coral0,myTiles.tile4,sprites.dungeon.floorDark2,sprites.dungeon.floorLight2,sprites.dungeon.purpleOuterNorth2,sprites.dungeon.purpleOuterSouth2,sprites.builtin.forestTiles3,sprites.builtin.forestTiles2,sprites.builtin.forestTiles4,sprites.builtin.forestTiles16,sprites.builtin.forestTiles22,sprites.builtin.forestTiles23,sprites.builtin.forestTiles21,sprites.dungeon.stairLadder,sprites.dungeon.stairSouth,sprites.dungeon.collectibleInsignia,sprites.dungeon.purpleSwitchDown,sprites.dungeon.doorLockedWest,sprites.dungeon.doorClosedWest,sprites.dungeon.floorMixed,sprites.dungeon.floorDarkDiamond,sprites.dungeon.floorDark4,sprites.dungeon.chestClosed,sprites.dungeon.hazardSpike,sprites.castle.rock0,sprites.castle.tileGrass1,sprites.castle.tileGrass2,sprites.builtin.forestTiles0,sprites.swamp.swampTile1,sprites.dungeon.purpleOuterNorthWest,sprites.dungeon.purpleOuterSouthEast,sprites.dungeon.purpleOuterSouthWest,sprites.dungeon.purpleOuterEast0,sprites.dungeon.purpleOuterWest0,sprites.dungeon.purpleOuterSouth1,myTiles.tile5], TileScale.Sixteen);
+            case "level10":
+            case "level10":return tiles.createTilemap(hex`1000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000`, img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, [myTiles.transparency16], TileScale.Sixteen);
         }
         return null;
     })

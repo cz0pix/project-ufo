@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const enemy2 = SpriteKind.create()
     export const title = SpriteKind.create()
+    export const Text = SpriteKind.create()
 }
 function AsteroidWave (num: number, mySprite: Sprite) {
     tileUtil.replaceAllTiles(assets.tile`myTile4`, assets.tile`myTile`)
